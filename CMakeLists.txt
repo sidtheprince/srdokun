@@ -52,7 +52,13 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/53)
 ########### look for "libraries (source)" in these folders
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}    )
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib)
-link_directories(${CMAKE_CURRENT_SOURCE_DIR} src)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
+if(WIN32)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/win32)
+endif()
+if(LINUX)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/linux)
+endif()
 # build executables
 add_executable(glue   ${glue_src}) # no dependencies
 add_executable(srlua ${srlua_src}) # depends on lua source which dokun can provide once linked
