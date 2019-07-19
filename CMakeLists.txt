@@ -36,6 +36,7 @@ endif()
 if(LINUX)
 set(dokun_src  libdokun.a                           )
 set(opengl_src libGL.so libGLU.so                   )
+set(OpenGL_GL_PREFERENCE "LEGACY"                   ) # LEGACY(libGL.so) OR GLVND(libOpenGL.so and libGLX.so)
 set(vulkan_src libvulkan.so                         )
 set(openal_src libopenal.so                         )
 set(posix_src  libpthread.so libdl.so libm.so       )
@@ -43,13 +44,13 @@ set(x11_src    libX11.a libxcb.a libXau.a libXdmcp.a)
 endif()
 # use C++ 11
 if(CMAKE_COMPILER_IS_GNUCXX)
-    set(CMAKE_CXX_FLAGS "-std=gnu++11 -L/lib/OpenAL32.lib")
+    set(CMAKE_CXX_FLAGS "-std=gnu++11 -no-pie -L/lib/OpenAL32.lib")
 endif()
-########### look for "includes" in these folders
+########### look for "includes" (.h, .hpp) in these folders
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}        )
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/53)
 ##
-########### look for "libraries (source)" in these folders
+########### look for "libraries (source: .c, .cpp, .a)" in these folders
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}    )
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib)
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
@@ -61,7 +62,7 @@ link_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/linux)
 endif()
 # build executables
 add_executable(glue   ${glue_src}) # no dependencies
-add_executable(srlua ${srlua_src}) # depends on lua source which dokun can provide once linked
+add_executable(srlua ${srlua_src}) # depends on lua source which dokun can provide once linked to (libdokun.a)
 ###########
 # link against dokun (contains lua source)
 target_link_libraries(srlua ${dokun_src})
@@ -73,7 +74,7 @@ if(WIN32)
 	    target_link_libraries(srlua ${opengl_src})
 	endif()
 	# find_package(Vulkan)
-	# if(Vulkan_FOUND)
+	#if(Vulkan_FOUND)
 	#    target_link_libraries(srlua ${vulkan_src})
 	# endif()
 endif()
@@ -98,7 +99,7 @@ if(LINUX)
 endif()
 
 # Win32
-# cd srdokun/srlua-101
+# cd srdokun
 # cmake -G"MinGW Makefiles"
 # mingw32-make
 # glue.exe srlua.exe test.lua test.exe
