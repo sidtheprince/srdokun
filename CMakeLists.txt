@@ -47,7 +47,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS "-std=gnu++11 -no-pie -L/lib/OpenAL32.lib")
 endif()
 ########### look for "includes" (.h, .hpp) in these folders
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}        )
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}           )
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/53)
 ##
 ########### look for "libraries (source: .c, .cpp, .a)" in these folders
@@ -88,10 +88,10 @@ if(LINUX)
     if(OPENGL_FOUND)
 	    target_link_libraries(srlua ${opengl_src})
 	endif()	
-	# find_package(Vulkan)
-	# if(Vulkan_FOUND)
-	#    target_link_libraries(srlua ${vulkan_src})
-	# endif
+	#find_package(Vulkan) # optional
+	if(Vulkan_FOUND)
+	    target_link_libraries(srlua ${vulkan_src})
+	endif()
 	find_package(OpenAL REQUIRED)
 	if(OPENAL_FOUND)
 		target_link_libraries(srlua ${openal_src})
