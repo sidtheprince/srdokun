@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.7.2) # you can change the version if you need to.
+cmake_minimum_required(VERSION 3.0) # you can change the version if you need to.
 ###########
 # make sure srlua version matches the lua version used by dokun 
 project(srlua) 
