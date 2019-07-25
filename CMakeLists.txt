@@ -73,7 +73,7 @@ if(WIN32)
 	if(OPENGL_FOUND)
 	    target_link_libraries(srlua ${opengl_src})
 	endif()
-	# find_package(Vulkan)
+	# find_package(Vulkan) # optional
 	#if(Vulkan_FOUND)
 	#    target_link_libraries(srlua ${vulkan_src})
 	# endif()
