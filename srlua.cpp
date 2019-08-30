@@ -2,16 +2,12 @@
 * srlua.c
 * Lua interpreter for self-running programs
 * Luiz Henrique de Figueiredo <lhf@tecgraf.puc-rio.br>
-* 27 Jul 2018 21:39:58
+* 14 Aug 2019 14:16:21
 * This code is hereby placed in the public domain and also under the MIT license
 */
 #ifdef __cplusplus // if c++ 
 extern "C" {       // run as c code
 #endif
-#ifdef _WIN32
-#include <windows.h>
-#endif
-
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -40,17 +36,11 @@ static void traceback(lua_State *L, const char *message)
 
 #endif
 
-#ifdef _WIN32
-#define alert(progname,message)	MessageBox(NULL,message,progname,MB_ICONERROR | MB_OK)
-#else
-#define alert(progname,message)	fprintf(stderr,"%s: %s\n",progname,message)
-#endif
-
 static const char* progname="srlua";
 
 static void fatal(const char* message)
 {
- alert(progname,message);
+ fprintf(stderr,"%s: %s\n",progname,message);
  exit(EXIT_FAILURE);
 }
 
@@ -97,7 +87,7 @@ static void load(lua_State *L, const char *name)
 static int pmain(lua_State *L)
 {
  int argc=lua_tointeger(L,1);
- char** argv=(char **)lua_touserdata(L,2);
+ char** argv=(char**)lua_touserdata(L,2);
  int i;
  luaL_openlibs(L);
  load(L,argv[0]);
@@ -129,16 +119,9 @@ static int msghandler(lua_State *L)
  return 1;
 }
 
-#ifdef _WIN32
-#define getprogname()	char name[MAX_PATH]; argv[0]= GetModuleFileName(NULL,name,sizeof(name)) ? name : NULL
-#else
-#define getprogname()
-#endif
-
 int main(int argc, char *argv[])
 {
  lua_State *L;
- getprogname();
  if (argv[0]==NULL) fatal("cannot locate this executable");
  progname=argv[0];
  L=luaL_newstate();

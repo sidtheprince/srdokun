@@ -2,7 +2,7 @@
 * srglue.c
 * glue exe and script for srlua
 * Luiz Henrique de Figueiredo <lhf@tecgraf.puc-rio.br>
-* 27 Jul 2018 21:39:18
+* 13 Aug 2019 08:44:57
 * This code is hereby placed in the public domain and also under the MIT license
 */
 
@@ -55,7 +55,7 @@ static long copy(FILE* in, const char* name, FILE* out, const char* outname)
 
 int main(int argc, char* argv[])
 {
- progname=argv[0];
+ if (argv[0]!=NULL && *argv[0]!=0) progname=argv[0];
  if (argc!=4)
  {
   fprintf(stderr,"usage: %s in.exe in.lua out.exe\n",progname);

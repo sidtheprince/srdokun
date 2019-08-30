@@ -9,12 +9,12 @@ copy linit.c from the Lua source, add it to srlua.c, and edit loadedlibs
 and preloadedlibs to suit your needs (lualibs in Lua 5.1).
 
 For each Lua program that you want to turn into a stand-alone program, do
-	glue srlua prog.lua a.out ; chmod +x a.out
+	srglue srlua prog.lua a.out ; chmod +x a.out
 Of course, you can use any name instead of a.out.
 
-For Windows, you need to create srlua.exe and glue.exe first. Then,
+For Windows, you need to create srlua.exe and srglue.exe first. Then,
 for each Lua program that you want to turn into a stand-alone program, do
-	glue srlua.exe prog.lua prog.exe
+	srglue srlua.exe prog.lua prog.exe
 Of course, you can use any name instead of prog.exe.
 
 To build srlua and srglue and run a simple test, just do make.
@@ -32,4 +32,3 @@ For detailed installation instructions, see
 This code is hereby placed in the public domain and also under the MIT license.
 
 Please send comments, suggestions, and bug reports to lhf@tecgraf.puc-rio.br .
-##
