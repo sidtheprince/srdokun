@@ -66,7 +66,7 @@ if(SRDOKUN_CLANG) # clang
 endif()
 ########### look for "includes" (.h, .hpp) in these folders
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}           )
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/53)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/54)
 ##
 ########### look for "libraries (source: .c, .cpp, .a)" in these folders
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}    )
