@@ -2,7 +2,7 @@
 a Lua program into a single, stand-alone program that  will execute the given Lua program when it is run.
 
 # Building srdokun:
-Requires <a href="https://cmake.org/download/">cmake</a> and a cpp compiler.
+Requires <a href="https://cmake.org/download/">CMake</a> and a C++11 compiler.
 ```sh
 $ cmake -G"... Makefiles"
 $ make
